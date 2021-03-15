@@ -10,6 +10,6 @@ Es inválidia porque el operador - no se encuentra entre 2 expresiones.
 Es válida porque 2+1 es una expresión valida y 3 también. Y una fórmula se construye con expresiones y símolos de relación en medio.
 
 ### *7)Quitá los paréntesis que sean superfluos*
-a) ((5+1) + (3*\6)) * (8*5)
+a) ((5+1) + (3*6)) * (8*5)
 b) ((2^2)+5) < (2+4)
 
