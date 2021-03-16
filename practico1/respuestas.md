@@ -1,7 +1,7 @@
 
-### *1)
-### *2)
-### *3)
+### *1)*
+### *2)*
+### *3)*
 2 + 1
 Es válida porque tanto 2 como 1 son números y expresiones a la vez y + es un operador.
 ### *5) Expresión inválida*
