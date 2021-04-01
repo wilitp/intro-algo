@@ -58,16 +58,18 @@ multiplicar zz tt = zz*tt
 ```
 a)
 - nombre: f
-- constantes: x
+- variables: x
+- constantes: 5
 b)
 - nombre: duplica
-- constantes: a
+- variables: a
 c)
 - nombre: por2
-- constantes: y
+- variables: y
+- constantes: 2
 d)
 - nombre: multiplicar
-- constantes: 'zz' y 'tt'
+- variables: 'zz' y 'tt'
 ### *14) Función promedio*
 ```haskell
 promedio x y = (x + y) / 2
@@ -75,17 +77,29 @@ promedio x y = (x + y) / 2
 ### *15) Evaluá las siguientes expresiones*
 ```haskell
 -- a
-multiplicar(f.5).2 + 1
+multiplicar (f 5) 2 + 1
 --b
-por2.(duplica.(3+5))
+por2 (duplica (3+5))
 ```
 a) 51
 b) 32
 
-### *16) Demostrar que duplica y por2 son iguales*
-si asertamos que `duplica = por2`, podemos resolver:
+### *16) Tipos de las funciones del 13 y 14
+```haskell
+-- 13
+f :: Num => a -> a
+duplica :: Num => a -> a
+por2:: Num => a -> a
+multiplicar :: Num => a -> a -> a
 
-`a + a = 2*a`
-`2a = 2a`
-`a = a`
+-- 14
+promedio :: Num a => a -> a -> a
+```
+### *17) 
+```haskell
+g :: Num a => a -> a
+h :: Num a => a -> a -> a
+j :: (Ord a, Num a) => a -> Bool 
+```
 
+## El resto en Main.hs
