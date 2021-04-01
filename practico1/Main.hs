@@ -6,7 +6,7 @@ f x = 5*x
 duplica a = a + a
 
 --c
-por2 y = 2*y
+por2 = (2*)
 
 --d
 multiplicar zz tt = zz*tt
