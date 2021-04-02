@@ -63,4 +63,23 @@ hay0 xs = not (noHay0 xs)
 sum1 :: [Int] -> Int -- sum ya existe en Prelude
 sum1 [] = 0
 sum1 (x:xs) = x + sum xs
+
+-- 6 zip ya existe
+miZip :: [a] -> [b] -> [(a, b)] 
+miZip [] (x:xs) = []
+miZip (x:xs) [] = []
+miZip (x:xs) (y:ys) = (x, y):miZip xs ys
+
+-- 7
+-- No es lo que pide ya se
+miUnzip :: [(a,b)] -> ([a], [b])
+primero (a, b) = a
+segundo (a, b) = b
+miUnzip [] = ([], [])
+miUnzip ((x, y):xs) = (x : primero (miUnzip xs),y : segundo (miUnzip xs))
+
+-- Ahora si
+apellidos :: [(String, String, Int)] -> [String]
+apellidos [] = []
+apellidos ((_, n, _):xs) = n : apellidos xs
 ```
