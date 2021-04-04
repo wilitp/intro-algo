@@ -163,7 +163,7 @@ repetir n x | n < 0 = error "Repeating ammount has to be greater than 0"
 -- 9.g
 -- La función miConcat fue definida en el ejercicio 8
 
--- 9.h la esta función ya existe, se llama reverse
+-- 9.h esta función ya existe, se llama reverse
 rev :: [a] -> [a]
 rev [] = []
 rev [x] = [x]
