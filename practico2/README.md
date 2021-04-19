@@ -66,50 +66,51 @@ soloPares(xs ++ ys) = soloPares xs ++ soloPares ys
 
 **Caso inductivo**
 
-_Dado que x e y son pares_
+**Si x es par:**
 
-soloPares(x:xs ++ y:ys) = soloPares x:xs ++ soloPares y:ys
+soloPares(x:xs ++ ys) = soloPares x:xs ++ soloPares ys
 
-soloPares(x:xs ++ y:ys) = x:(soloPares xs) ++ y:(soloPares ys)
+soloPares(x:(xs ++ ys)) = soloPares x:xs ++ soloPares ys
 
-soloPares(x:xs ++ y:ys) = x:(soloPares xs ++ y:soloPares ys)
+{Definición recursiva de ++}
 
-soloPares(x:(xs ++ y:ys)) = x:(soloPares xs ++ y:soloPares ys)
+x:soloPares((xs ++ ys)) = soloPares x:xs ++ soloPares ys
 
-x:soloPares(xs ++ y:ys)) = x:(soloPares xs ++ soloPares y:ys)
+{Definición recursiva de soloPares}
 
-x:soloPares(xs ++ y:ys)) = x:(soloPares xs ++ y:ys)
+x:soloPares((xs ++ ys)) = x:soloPares xs ++ soloPares ys
 
+{Definición recursiva de soloPares}
 
-_Dado que x es par e y es impar_
+x:soloPares((xs ++ ys)) = x:(soloPares xs ++ soloPares ys)
 
-soloPares(x:xs ++ y:ys) = soloPares x:xs ++ soloPares y:ys
+{Definición recursiva de ++}
 
-soloPares(x:xs ++ y:ys) = x:(soloPares xs) ++ (soloPares ys)
+x:soloPares((xs ++ ys)) = x:(soloPares(xs ++ ys))
 
-soloPares(x:xs ++ y:ys) = x:(soloPares xs ++ soloPares ys)
+{Definición recursiva de ++}
 
-soloPares(x:xs ++ y:ys) = x:(soloPares (xs ++ ys) -- hipótesis
-
-soloPares(x:xs ++ y:ys) = (soloPares x(xs ++ ys)
-
-
-_Dado que x es impar e y es par_ -- TODO
-
-soloPares(x:xs ++ y:ys) = soloPares x:xs ++ soloPares y:ys
-
-soloPares(x:xs ++ y:ys) = soloPares xs ++ y:(soloPares ys)
-
-soloPares(xs ++ y:ys) = soloPares xs ++ soloPares y:ys
+{Queda demostrado por reflexividad de la suma}
 
 
-_Dado que x e y son impares_ -- TODO
+**Si x es impar**
 
-soloPares(x:xs ++ y:ys) = soloPares x:xs ++ soloPares y:ys
+soloPares(x:xs ++ ys) = soloPares x:xs ++ soloPares ys
 
-soloPares(x:xs ++ y:ys) = soloPares xs ++ soloPares y:ys
+soloPares(x:xs ++ ys) = soloPares xs ++ soloPares ys
 
-soloPares(xs ++ y:ys) = soloPares(xs ++ ys)
+{Definición recursiva de soloPares}
+
+soloPares(x:(xs ++ ys)) = soloPares xs ++ soloPares ys
+
+{Definición recursiva de ++}
+
+soloPares(xs ++ ys) = soloPares xs ++ soloPares ys
+
+{Definición recursiva de soloPares}
 
 soloPares(xs ++ ys) = soloPares(xs ++ ys)
 
+{Hipótesis inductiva}
+
+{Queda demostrado por reflexividad de la suma}
