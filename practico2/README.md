@@ -1,4 +1,4 @@
-**Para ejercicios 1-9 ver Main.hs**
+Para ejercicios 1-9 ver [Práctico 1](https://github.com/wilitp/intro-algo/tree/main/practico2/Main.hs)
 
 ## 10
 **.a Demostrar sum(sumar1.xs) = sum(xs) + #xs**
