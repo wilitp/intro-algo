@@ -110,18 +110,22 @@ pegarDerecha (x:xs) y = x:pegarDerecha xs y
 miTake :: Int -> [a] -> [a]
 miTake 0 _ = []
 miTake _ [] = []
-miTake n (x:xs) = x:miTake (n-1) xs 
+miTake n (x:xs) | n < 0 = []
+                | otherwise = x:miTake (n-1) xs 
+
 
 -- Operador drop
 miDrop :: Int -> [a] -> [a]
 miDrop 0 xs = xs
 miDrop _ [] = []
-miDrop n (x:xs) = miDrop (n-1) xs
+miDrop n (x:xs) | n < 0 = x:xs
+                | otherwise = miDrop (n-1) xs
 
 -- Operador ++
-miConcat :: [a] -> [a] -> [a]
-miConcat [] ys = ys
-miConcat xs ys = miConcat (miTake (miLength xs -1) xs) (miDrop (miLength xs - 1) xs `tomarPorIndice` 0 : ys)
+miMasMas :: [a] -> [a] -> [a]
+miMasMas [] ys = ys
+-- Le pego el último elemento de la primera a la segunda recursivamente hasta que la primera está vacía.
+miMasMas xs ys = miMasMas (miTake (miLength xs -1) xs) (miDrop (miLength xs - 1) xs `tomarPorIndice` 0 : ys)
 
 -- 9
 -- Esta función ya existe, se llama filter
@@ -161,7 +165,10 @@ repetir n x | n < 0 = error "Repeating ammount has to be greater than 0"
             | otherwise = x:repetir (n-1) x
 
 -- 9.g
--- La función miConcat fue definida en el ejercicio 8
+miConcat :: [[a]] -> [a]
+miConcat [] = []
+miConcat (x:xs) = x ++ concat xs
+
 
 -- 9.h esta función ya existe, se llama reverse
 rev :: [a] -> [a]
