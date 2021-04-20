@@ -1,7 +1,7 @@
 Para ejercicios 1-9 ver [Práctico 1](https://github.com/wilitp/intro-algo/tree/main/practico2/Main.hs)
 
 ## 10
-**.a Demostrar sum(sumar1.xs) = sum(xs) + #xs**
+**.a Demostrar sum(sumar1 xs) = sum xs + #xs**
 sum [] = 0
 sum (x:xs) = x + sum xs
 
@@ -26,10 +26,10 @@ sum(sumar1 xs) = sum xs + #xs
 **Caso inductivo**
 
 sum(sumar1[x:xs]) = sum(x:xs) + #(x:xs)
-sum(sumar1[x:xs]) = x + sum xs  + 1 + # xs
+sum(sumar1[x:xs]) = x + sum xs + 1 + # xs
 sum(sumar1[x:xs]) = x + 1 + sum xs + # xs
-sum(sumar1[x:xs]) = x + 1 + sum(sumar1 xs)
-sum(sumar1[x:xs]) = sum((x + 1) + sumar1 xs)
+sum(sumar1[x:xs]) = (x + 1) + sum(sumar1 xs) -- Hipótesis inductiva
+sum(sumar1[x:xs]) = sum((x + 1) : sumar1 xs)
 sum(sumar1[x:xs]) = sum((sumar1 x:xs)
 
 **.b Demostrar sum(duplica xs) = 2 * sum xs**
@@ -88,9 +88,9 @@ x:soloPares((xs ++ ys)) = x:(soloPares xs ++ soloPares ys)
 
 x:soloPares((xs ++ ys)) = x:(soloPares(xs ++ ys))
 
-{Definición recursiva de ++}
+{Hipótesis inductiva}
 
-{Queda demostrado por reflexividad de la suma}
+{Queda demostrado por reflexividad del igual}
 
 
 **Si x es impar**
