@@ -113,4 +113,4 @@ soloPares(xs ++ ys) = soloPares(xs ++ ys)
 
 {Hipótesis inductiva}
 
-{Queda demostrado por reflexividad de la suma}
+{Queda demostrado por reflexividad del igual}
