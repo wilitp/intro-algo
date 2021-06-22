@@ -400,27 +400,19 @@ True
 
 { Currificación }
 
-__<Ex :: cuadrado.x>__ => (<Ax :: amarillo.x> => <Ex :: cuadrado.x && amarillo.x>)
-
-{ Definición existe }
-
-__!<Ax :: !cuadrado.x> => (<Ax :: amarillo.x> => <Ex :: cuadrado.x && amarillo.x>)__
+__<Ex :: cuadrado.x> => (<Ax :: amarillo.x> => <Ex :: cuadrado.x && amarillo.x>)__
 
 { Caracterización del implica }
 
-<Ax :: !cuadrado.x> V __(<Ax :: amarillo.x> => <Ex :: cuadrado.x && amarillo.x>)__
+!<Ex :: cuadrado.x> V __(<Ax :: amarillo.x> => <Ex :: cuadrado.x && amarillo.x>)__
 
 { Caracterización del implica }
 
-<Ax :: !cuadrado.x> V !<Ax :: amarillo.x> V __<Ex :: cuadrado.x && amarillo.x>__
+!<Ex :: cuadrado.x> V !<Ax :: amarillo.x> V __<Ex :: cuadrado.x && amarillo.x>__
 
 { Intercambio entre rango y término del existe }
 
-<Ax :: !cuadrado.x> V !<Ax :: amarillo.x> V <Ex : cuadrado.x : amarillo.x>
-
-{ Definición de existe }
-
-__<Ax :: !cuadrado.x>__ V <Ex :: !amarillo.x> V <Ex : cuadrado.x : amarillo.x>
+!<Ex :: cuadrado.x> V _!<Ax :: amarillo.x>_ V <Ex : cuadrado.x : amarillo.x>
 
 { Definición de existe }
 
@@ -492,19 +484,77 @@ Luego <Ex : cuadrado.x : amarillo.x> V True === True
 ```
 
 
+## 27) Formalizar: Ningún círculo en xs es rojo
+```noop
+<Ax : x E xs && circulo.x : !rojo.x>
 
-## 31) Demostrar que las siguientes fórmulas son teoremas del Cálculo de Predicados.
+{ Definición existe }
+```
+
+## 28) Formalizar: Hay un único cuadrado xs y es rojo
+
+```noop
+<Ei : validI.i.xs : cuadrado.xs!!i && rojo.xs!!i && !<Ej : validI.j.xs && j != i : cuadrado.xs!!j> >
+```
+
+## 29) Formalizar: Todas la figuras de xs son triángulos rojos o cuadrados
+
+```noop
+<Ax : x E xs : (triangulo.x && rojo.x) V cuadrado.x>
+
+<Ax : x E xs && triangulo.x : rojo.x> && <Ax : x E xs && !triangulo.x : cuadrado.x>
+```
+
+## 30) Formalizar: Existe solo un elemento mayor a cero
+
+```noop
+<Ei : validI.i.xs : xs!!i > 0 <Aj: validI.j.xs && (j != i) : > >
+```
+
+## 31) Formalizar: 
+
+a) Hay un triángulo en xs con tamaño menor a 5.
+
+```noop
+<Ex: x e xs : traingulo.x && (tam.x < 5) >
+```
+
+b) El último elemento de xs está en ys.
+
+```noop
+xs!!(#xs-1) e ys
+```
+
+## 32) Demostrar
+
+**4)**
+
+```noop
+<Ax :: !(P.x => Q.x)> === <Ax :: P.x> && <Ax :: !Q.x>
+
+{ Regla del término del para todo}
+
+<Ax :: !(P.x => Q.x)> === <Ax :: P.x && !Q.x>
+
+{ Morgan conjunción }
+
+<Ax :: !(P.x => Q.x)> === <Ax :: !(!P.x V Q.x)>
+
+{ Caracterización del implica }
+
+<Ax :: !(P.x => Q.x)> === <Ax :: !(P.x => Q.x)>
+
+{ Reflexividad de la equivalencia}
+
+True
+```
 
 **a)**
 
 ```noop
 <Ax :: Tx> => <Ax : R.x : T.x>
 
-{ Definición del implica }
-
-<Ax :: Tx> V <Ax : R.x : T.x> === <Ax : R.x : T.x>
-
-{ Regla dorada }
+{ Definición dual del implica }
 
 <Ax :: Tx> && <Ax : R.x : T.x> === <Ax :: T.x>
 
@@ -522,18 +572,41 @@ True
 
 ```
 
-## 32) Demostrar
-
-```noop
-__<Ex : R.x : T.x >__ && __<Ax : R.x : S.x>__ => __<Ex : R.x : T.x && S.x>__
-
-{ Intercambio rango y término de todo x3 }
-
-<Ex :: R.x && T.x > && <Ax :: R.x => S.x> => <Ex :: R.x && T.x && S.x>
-```
-
 ## 33) Demostrar
 
 ```noop
-<Ax :: P.x => Q.x> => (<Ex :: P.x> => <Ex :: Q.x>)
+<Ex : R.x : T.x > && __<Ax : R.x : S.x>__ => <Ex : R.x : T.x && S.x>
+
+{ Definición de existe }
+
+<Ex : R.x : T.x> && !<Ex : R.x : !S.x> => <Ex : R.x : T.x && S.x>
+
+{ Currificación }
+
+<Ex : R.x : T.x> => (!<Ex : R.x : !S.x> => <Ex : R.x : T.x && S.x>)
+
+{ Caracterización del implica }
+
+<Ex : R.x : T.x> => (<Ex : R.x : !S.x> V <Ex : R.x : T.x && S.x>)
+
+{ Regla del término del existe }
+
+<Ex : R.x : T.x> => (<Ex : R.x : !S.x V (T.x && S.x>))
+
+{ Distribución de la disyunción en la conjunción }
+
+<Ex : R.x : T.x> => (<Ex : R.x : (!S.x V T.x) && (!S.x V S.x)>)
+
+{ Tercero excluido + neutro de la conjunción }
+
+<Ex : R.x : T.x> => <Ex : R.x : !S.x V T.x>
+
+{ Regla del término del existe }
+
+<Ex : R.x : T.x> => <Ex : R.x : !S.x> V <Ex : R.x : T.x>
+
+{ Debilitamiento para disyunción }
+
+True
 ```
+
