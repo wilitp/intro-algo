@@ -506,37 +506,21 @@ True
 
 ```noop
 <Ex : R.x : T.x > && __<Ax : R.x : S.x>__ => <Ex : R.x : T.x && S.x>
-
 { Definición de existe }
-
 <Ex : R.x : T.x> && !<Ex : R.x : !S.x> => <Ex : R.x : T.x && S.x>
-
 { Currificación }
-
 <Ex : R.x : T.x> => (!<Ex : R.x : !S.x> => <Ex : R.x : T.x && S.x>)
-
 { Caracterización del implica }
-
 <Ex : R.x : T.x> => (<Ex : R.x : !S.x> V <Ex : R.x : T.x && S.x>)
-
 { Regla del término del existe }
-
 <Ex : R.x : T.x> => (<Ex : R.x : !S.x V (T.x && S.x>))
-
 { Distribución de la disyunción en la conjunción }
-
 <Ex : R.x : T.x> => (<Ex : R.x : (!S.x V T.x) && (!S.x V S.x)>)
-
 { Tercero excluido + neutro de la conjunción }
-
 <Ex : R.x : T.x> => <Ex : R.x : !S.x V T.x>
-
 { Regla del término del existe }
-
 <Ex : R.x : T.x> => <Ex : R.x : !S.x> V <Ex : R.x : T.x>
-
 { Debilitamiento para disyunción }
-
 True
 ```
 
