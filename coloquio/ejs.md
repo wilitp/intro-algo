@@ -392,95 +392,25 @@ True
 <Ex : x E xs : cuadrado.x && tam.x < 10 >
 ```
 
-## 26) Demostrar 
-**Debería optimizar**
-
+## 26) Demostrar
 ```noop
 <Ex :: cuadrado.x> && <Ax :: amarillo.x> => <Ex :: cuadrado.x && amarillo.x>
-
+{ Definición de existe }
+<Ex :: cuadrado.x> && !<Ex :: !amarillo.x> => <Ex :: cuadrado.x && amarillo.x>
 { Currificación }
-
-__<Ex :: cuadrado.x> => (<Ax :: amarillo.x> => <Ex :: cuadrado.x && amarillo.x>)__
-
+<Ex :: cuadrado.x> => (!<Ex :: !amarillo.x> => <Ex :: cuadrado.x && amarillo.x>)
 { Caracterización del implica }
-
-!<Ex :: cuadrado.x> V __(<Ax :: amarillo.x> => <Ex :: cuadrado.x && amarillo.x>)__
-
-{ Caracterización del implica }
-
-!<Ex :: cuadrado.x> V !<Ax :: amarillo.x> V __<Ex :: cuadrado.x && amarillo.x>__
-
-{ Intercambio entre rango y término del existe }
-
-!<Ex :: cuadrado.x> V _!<Ax :: amarillo.x>_ V <Ex : cuadrado.x : amarillo.x>
-
-{ Definición de existe }
-
-!<Ex __::__ cuadrado.x> V <Ex :: !amarillo.x> V <Ex : cuadrado.x : amarillo.x>
-
-{ Tercero excluido  }
-
-!__<Ex : amarillo.x V !amarillo.x : cuadrado.x>__ V <Ex :: !amarillo.x> V <Ex : cuadrado.x : amarillo.x>
-
-{ Partición de rango del existe }
-
-__!(<Ex : amarillo.x : cuadrado.x> V <Ex : !amarillo.x : cuadrado.x>)__ V <Ex :: !amarillo.x> V <Ex : cuadrado.x : amarillo.x>
-
-{ Morgan }
-
-(!<Ex : amarillo.x : cuadrado.x> && !<Ex : !amarillo.x : cuadrado.x>) V <Ex :: !amarillo.x> V __<Ex : cuadrado.x : amarillo.x>__
-
-{ Conmutación de la disyunción }
-
-__<Ex : cuadrado.x : amarillo.x> V (!<Ex : amarillo.x : cuadrado.x> && !<Ex : !amarillo.x : cuadrado.x>)__ V <Ex :: !amarillo.x>
-
-{ Distribución de la disyunción en la conjunción}
-
-( __<Ex : cuadrado.x : amarillo.x> V !<Ex : amarillo.x : cuadrado.x>__ && <Ex : cuadrado.x : amarillo.x> V !<Ex : !amarillo.x : cuadrado.x>) V <Ex :: !amarillo.x>
-
-{ Intercambio de rango y término del existe + tercero excluido }
-
-( True && <Ex : cuadrado.x : amarillo.x> V !<Ex : !amarillo.x : cuadrado.x>) V <Ex :: !amarillo.x>
-
-{ Neutro de la conjunción }
-
-<Ex : cuadrado.x : amarillo.x> V !<Ex _: !amarillo.x : cuadrado.x__> V <Ex :: !amarillo.x>
-
-{ Intercambio de rango y término del existe }
-
-<Ex : cuadrado.x : amarillo.x> V __!<Ex : cuadrado.x : !amarillo.x> V <Ex :: !amarillo.x>_
-
-{ Definición de existe }
-
-<Ex : cuadrado.x : amarillo.x> V __<Ax : cuadrado.x : amarillo.x> V !<Ax :: amarillo.x>__
-
-{ Queda probar que <Ax : cuadrado.x : amarillo.x> V !<Ax :: amarillo.x> es un teorema(Pensar el escenario en el que ambas partes son False hace evidente que lo es). 
-Luego toda la expresión es un teorema por absorvente de la disyunción }
-
-__<Ax : cuadrado.x : amarillo.x> V !<Ax :: amarillo.x>__
-
-{ Conmutación + Caracterización del implica }
-
-__<Ax :: amarillo.x> => <Ax : cuadrado.x : amarillo.x>__
-
-{ Definición dual de implicación }
-
-<Ax :: amarillo.x> && <Ax : cuadrado.x : amarillo.x> === <Ax :: amarillo.x>
-
-{ Partición del rango del para todo }
-
-<Ax : True V cuadrado.x : amarillo.x> === <Ax :: amarillo.x>
-
-{ Absorvente de la conjunción }
-
-<Ax :: amarillo.x> === <Ax :: amarillo.x>
-
-{ Reflexividad }
-
+<Ex :: cuadrado.x> => (<Ex :: !amarillo.x> V <Ex :: cuadrado.x && amarillo.x>)
+{ Regla del término del existe }
+<Ex :: cuadrado.x> => <Ex :: !amarillo.x V (cuadrado.x && amarillo.x>)
+{ Distribución del V en &&}
+<Ex :: cuadrado.x> => <Ex :: (!amarillo.x V cuadrado.x) && (!amarillo.x V amarillo.x)>)
+{ Tercero excluido + neutro de la conjunción }
+<Ex :: cuadrado.x> => <Ex :: (!amarillo.x V cuadrado.x)>)
+{ Regla del término del existe }
+<Ex :: cuadrado.x> => <Ex :: !amarillo.x> V <Ex :: cuadrado.x)>)
+{ Debilitamiento para V}
 True
-
-Luego <Ex : cuadrado.x : amarillo.x> V True === True
-
 ```
 
 
