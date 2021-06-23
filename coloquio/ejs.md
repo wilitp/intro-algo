@@ -1,3 +1,137 @@
+## 10) Demostrar `#(stutter.xs) = 2 * #xs`
+
+**Caso base**
+```noop
+#(stutter.[]) = 2 * #[]
+{Caso base de stutter}
+#([]) = 2 * #[]
+{Caso base cardinal}
+0 = 2 * 0
+{Aritmética}
+0 = 0
+True
+```
+
+**Paso inductivo**
+```noop
+Hipótesis: #(stutter.ks) = 2 * #ks
+
+#(stutter.(k:ks)) = 2 * #(k:ks)
+{Caso recursivo de stutter}
+#(k:(k:stutter.ks)) = 2 * #(k:ks)
+{ Caso recursivo de cardinal x3}
+1 + 1 + #(stutter.ks) = 2 * (1 + #ks)
+{Aritmética}
+2 + #(stutter.ks) = 2 + 2 * #ks
+{Uniformidad del igual}
+#(stutter.ks) = 2 * #ks
+{Hipótesis}
+True
+```
+
+## 11) Demostrar `soloPares(xs ++ ys) = soloPares.xs ++ soloPares.ys`
+```haskell
+-- 1
+soloPares [] = []
+-- 2
+soloPares (x:xs) | even x = x : soloPares xs
+                 | Otherwise = soloPares xs
+```
+
+**Caso base**
+```noop
+soloPares([] ++ ys) = soloPares.[] ++ soloPares.ys
+{Caso base concatenar}
+soloPares(ys) = soloPares.[] ++ soloPares.ys
+{1}
+soloPares(ys) = [] ++ soloPares.ys
+{Caso base concatenar}
+soloPares(ys) = soloPares.ys
+{Reflexividad}
+True
+```
+**Paso inductivo**
+```noop
+Hipótesis: soloPares(ks ++ ys) = soloPares.ks ++ soloPares.ys
+
+Caso k es par
+soloPares.(k:ks ++ ys) = soloPares.(k:ks) ++ soloPares.ys
+{Caso recursivo de concatenar}
+soloPares.(k:(ks ++ ys)) = soloPares.(k:ks) ++ soloPares.ys
+{Caso recursivo soloPares}
+k : soloPares.(ks ++ ys) = k : soloPares.(ks) ++ soloPares.ys
+{Hipótesis}
+k : soloPares.(ks ++ ys) = k : soloPares.(ks ++ ys)
+{Reflexividad}
+True
+
+Caso k es impar
+soloPares.(k:ks ++ ys) = soloPares.(k:ks) ++ soloPares.ys
+{Caso recursivo de concatenar}
+soloPares.(k:(ks ++ ys)) = soloPares.(k:ks) ++ soloPares.ys
+{Caso recursivo soloPares}
+soloPares.(ks ++ ys) = soloPares.(ks) ++ soloPares.ys
+{Hipótesis}
+True
+
+```
+
+## 12) Demostrar `cuantos0y1.xs = cuantos0y1.(swap0y1.xs)`
+```haskell
+-- 1
+cuantos0y1 [] = 0
+--2
+cuantos0y1 (x:xs) | x == 0 V x == 1 = 1 + cuantos0y1 xs
+                  | Otherwise = cuantos0y1
+--3
+swap0y1 [] = []
+--4
+swap0y1 (x:xs) | x == 1 = 0 : swap0y1 xs
+               | x == 0 = 1 : swap0y1 xs
+               | Otherwise = x : swap0y1 xs
+```
+
+**Caso base**
+```noop
+cuantos0y1.[] = cuantos0y1.(swap0y1.[])
+{1}
+cuantos0y1.[] = cuantos0y1.([])
+{Reflexividad}
+True
+''
+```
+
+**Paso inductivo**
+```noop
+Hipótesis: cuantos0y1.ks = cuantos0y1.(swap0y1.ks)
+
+cuantos0y1.(k:ks) = cuantos0y1.(swap0y1.(k:ks))
+
+Caso k = 1 o 0
+{2}
+cuantos0y1.(k:ks) = cuantos0y1.(swap0y1.(k:ks))
+1 + cuantos0y1.ks = cuantos0y1.(swap0y1.(k:ks))
+{4 y 2}
+1 + cuantos0y1.ks = 1 + cuantos0y1.(swap0y1.ks)
+{Uniformidad del igual}
+cuantos0y1.ks = cuantos0y1.(swap0y1.ks)
+{Hipótesis}
+True
+
+Caso k != 1,0
+cuantos0y1.(k:ks) = cuantos0y1.(swap0y1.(k:ks))
+{2}
+cuantos0y1.ks = cuantos0y1.(swap0y1.(k:ks))
+{4}
+cuantos0y1.ks = cuantos0y1.(k : swap0y1.(ks))
+{2}
+cuantos0y1.ks = cuantos0y1.(swap0y1.(ks))
+{Hipótesis}
+True
+
+
+```
+
 ## 13) Demostrar por inducción que cuantos.1.(agregaSiguiente.xs) = cuantos.0.xs + cuantos.1.xs
 ```haskell
 -- 1
@@ -616,3 +750,41 @@ cuadrado.k V algunCuadrado.ks === cuadrado.k V <Eh : h e ks : cuadrado.h>
 True
 ```
 
+## 38) Demostrar que `soloCeros.xs === <Ax : x e xs : x == 0>`
+
+```haskell
+soloCeros [] = True
+soloCeros (x:xs) = x == 0 && soloCeros xs
+```
+
+**Caso Base**
+```noop
+soloCeros.[] === <Ax : x e [] : x == 0>
+{Caso base soloCeros}
+True === <Ax : x e [] : x == 0>
+{Caso base pertenece}
+True === <Ax : False : x == 0>
+{Rango vacío del para todo}
+True === True
+True
+```
+
+**Paso Inductivo**
+Hipótesis:
+```noop
+soloCeros.ks === <Ax : k e ks : k == 0>
+
+soloCeros.(k:ks) === <Ax : h e (k:ks) : h == 0>
+{Caso recursivo de solo ceros}
+k==0 && soloCeros.ks === <Ax : h e (k:ks) : h == 0>
+{Caso recursivo de pertenece}
+k==0 && soloCeros.ks === <Ax : h==k V h e ks : h == 0>
+{Partición de rango del para todo}
+k==0 && soloCeros.ks === <Ax : h==k : h == 0> && <Ax : h e ks : h == 0>
+{Rango unitario del para todo}
+k==0 && soloCeros.ks === k==0 && <Ax : h e ks : h == 0>
+{Cambio de variable y hipótesis}
+k==0 && soloCeros.ks === k==0 && soloCeros.ks
+{Reflexividad}
+True
+```
