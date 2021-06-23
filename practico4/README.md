@@ -151,7 +151,7 @@ True
 
 **c) Regla del término del para todo con el mismo rango(distinto de True)**
 
-```
+```noop
 <Ax : R.x : T.x > && <Ax : R.x : U.x > === <Ax : R.x : T.x && U.x> 
 
 { Intercambio entre rango y término }
@@ -185,7 +185,7 @@ True
 
 **d) Regla del término del existe**
 
-```
+```noop
 <3x : R.x : T.x > || <3x : R.x : U.x > === <3x : R.x : T.x || U.x> 
 
 { Definición del existe }

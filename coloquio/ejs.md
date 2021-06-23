@@ -1,5 +1,3 @@
-
-
 ## 13) Demostrar por inducción que cuantos.1.(agregaSiguiente.xs) = cuantos.0.xs + cuantos.1.xs
 ```haskell
 -- 1
@@ -521,6 +519,100 @@ True
 { Regla del término del existe }
 <Ex : R.x : T.x> => <Ex : R.x : !S.x> V <Ex : R.x : T.x>
 { Debilitamiento para disyunción }
+True
+```
+
+## 34) Demostrar
+
+```noop
+<Ax :: P.x => Q.x> => (<Ex :: P.x> => <Ex :: Q.x>)
+{ Intercambio de rango y término }
+<Ax : P.x : Q.x> => (<Ex :: P.x> => <Ex :: Q.x>)
+{ Caracterización del implica }
+!<Ax : P.x : Q.x> V (<Ex :: P.x> => <Ex :: Q.x>)
+{ Definición de existe }
+<Ex : P.x : !Q.x> V (<Ex :: P.x> => <Ex :: Q.x>)
+{ Intercambio de rango y término del existe }
+<Ex :: P.x && !Q.x> V (<Ex :: P.x> => <Ex :: Q.x>)
+{ Caracterización del implica }
+__<Ex :: P.x && !Q.x>__ V !<Ex :: P.x> V __<Ex :: Q.x>__
+{ Conmutación + regla del término del existe }
+<Ex :: __(P.x && !Q.x) V Q.x__> V !<Ex :: P.x>
+{ Distribución del V en el &&}
+<Ex :: (P.x V Q.x) && (!Q.x V Q.x)> V !<Ex :: P.x>
+{ Tercero excluido y Neutro de la conjunción }
+<Ex :: P.x V Q.x> V !<Ex :: P.x>
+{ Caracterización del implica }
+<Ex :: P.x> => <Ex :: P.x V Q.x>
+{ Regla del término del existe y debilitamiento para V}
+True 
+```
+
+## 35) No existe xd
+
+## 36) Demostrar
+```noop
+__<Ax : R.x : T.x >__ && __<Ax : !T.x : R.x>__ === <Ax :: T.x>
+{ Definición de existe x2 }
+!<Ex : __R.x : !T.x__ > && !<Ex : __!T.x : !R.x__> === <Ax :: T.x>
+{Intercambio de rango y término del existe x2}
+__!<Ex : !T.x : R.x > && !<Ex : !T.x : !R.x>__ === <Ax :: T.x>
+{Morgan &&}
+!(__<Ex : !T.x : R.x > V <Ex : !T.x : !R.x>__) === <Ax :: T.x>
+{Regla del término del existe}
+!(<Ex : !T.x : __R.x V !R.x>) === <Ax :: T.x>
+{Tercero excluido}
+!(<Ex : __!T.x : True__>) === <Ax :: T.x>
+{Intercambio de rango y término x2}
+__!(<Ex : True : !T.x>)__ === <Ax :: T.x>
+{Definición de existe}
+__<Ax :: T.x> === <Ax :: T.x>__
+{Reflexividad de la equivalencia}
+True
+```
+## 37) Demostrar `algunCuadrado.xs === <Ex : x e xs : cuadrado.x>`
+
+```haskell
+-- 1
+algunCuadrado [] = False
+--2
+algunCuadrado (x:xs) = cuadrado.x V algunCuadrado xs
+
+-- 3
+e x [] = False
+-- 4
+e x (y:ys) = x == y || e x ys 
+```
+
+**Caso base**
+```noop
+algunCuadrado.[] === <Ex : x e [] : cuadrado.x>
+{2}
+False === <Ex : x e [] : cuadrado.x>
+{3}
+False === <Ex : False : cuadrado.x>
+{Rango vacío del existe}
+False === False
+True
+```
+
+**Hipótesis**
+```noop
+algunCuadrado.ks === <Ek : k e ks : cuadrado.x>
+```
+
+**Caso inductivo**
+```noop
+algunCuadrado.(k:ks) === <Eh : h e (k:ks) : cuadrado.h>
+{ Caso recursivo del pertenece }
+algunCuadrado.(k:ks) === <Eh : h === k V (e h ks) : cuadrado.h>
+{Partición del rango de existe}
+algunCuadrado.(k:ks) === <Eh : h === k : cuadrado.h> V <Eh : h e ks : cuadrado.h>
+{Rango unitario}
+algunCuadrado.(k:ks) === cuadrado.k V <Eh : h e ks : cuadrado.h>
+{Caso recursivo de algunCuadrado}
+cuadrado.k V algunCuadrado.ks === cuadrado.k V <Eh : h e ks : cuadrado.h>
+{Cambio de variable + hipótesis + reflexividad}
 True
 ```
 
