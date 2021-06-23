@@ -268,7 +268,7 @@ p && (p V q) === p
 
 p === (p V q) === p V (p V q) === p
 
-{ Distribución de la disyunción  }
+{ Distribución de la disyunción }
 
 p V ( False === q === p V q === False )
 
@@ -294,7 +294,7 @@ True
 
 ```
 
-## 16) 
+## 16) Debilitamiento para V
 
 ```noop
 
@@ -319,7 +319,7 @@ True
 
 p && (p => q) === p && q
 
-{ Morgan conjunción  }
+{ Morgan conjunción x2 }
 
 !(!p V !(p => q)) === !(!p V !q)
 
@@ -356,7 +356,7 @@ p => q === !q => !p
 
 !p V q === q V !p
 
-{ Conmutación + reflexividad del implica }
+{ Conmutación + reflexividad de la equivalencia}
 
 True
 ```
@@ -368,33 +368,41 @@ True
 
 { Caracterización de la implicación }
 
-!(!p V q) V (!(p && r) V q && r)
+!(!p V q) V (!(p && r) V (q && r))
 
 { Morgan para la disyunción }
 
-(p V !q) V (!(p && r) V q && r)
+(p && !q) V (!(p && r) V (q && r))
 
 { Morgan para la conjunción }
 
-(p V !q) V (!p V !r V (q && r))
+(p && !q) V (!p V !r V (q && r))
 
 { Distribución de la disyunción en la conjunción }
 
-(p V !q) V (!p V (!r V q && !r V r))
+(p && !q) V (!p V (!r V q && !r V r))
 
 { Tercero excluido }
 
-(p V !q) V (!p V (!r V q && True))
+(p && !q) V (!p V (!r V q && True))
 
 { Neutro de la conjunción }
 
-(p V !q) V (!p V (!r V q))
+(p && !q) V (!p V (!r V q))
 
 { Asociación de la disyunción }
 
-p V !q V !p V !r V q
+(p && !q) V !p V !r V q
 
-{ Tercero excluido (usando q y !q) }
+{ Distribución de la disyunción en la conjunción }
+
+(p V q && !q V q) V !p V !r
+
+{ Tercero excluido y neutro de la conjunción }
+
+p V q V !p V !r
+
+{Tercero excluido + absorvente de la disyunción}
 
 True
 ```
@@ -463,7 +471,7 @@ q V !p V r === p V q V r === q V r
 
 { Distribución de la disyunción }
 
-q V r V(!p === p === False)
+q V r V (!p === p === False)
 
 { Equivalencia y negación }
 
